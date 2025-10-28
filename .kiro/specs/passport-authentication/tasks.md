@@ -85,9 +85,9 @@
     - Import PassportModule for strategy support
     - _Requirements: 3.1, 3.2_
 
-- [ ] 5. Implement JWT Strategy and Guards
+- [x] 5. Implement JWT Strategy and Guards
 
-  - [ ] 5.1 Create JwtStrategy class
+  - [x] 5.1 Create JwtStrategy class
 
     - Create JwtStrategy in server/src/api/v1/auth/strategies/jwt.strategy.ts
     - Extend PassportStrategy with passport-jwt Strategy
@@ -95,14 +95,14 @@
     - Implement validate method to return user payload
     - _Requirements: 2.1, 2.3, 2.4_
 
-  - [ ] 5.2 Create JwtAuthGuard
+  - [x] 5.2 Create JwtAuthGuard
 
     - Create JwtAuthGuard in server/src/common/guards/jwt-auth.guard.ts
     - Extend AuthGuard with 'jwt' strategy name
     - Provide reusable guard for protected routes
     - _Requirements: 2.1, 2.2, 3.3_
 
-  - [ ] 5.3 Configure AuthModule with JWT Strategy
+  - [x] 5.3 Configure AuthModule with JWT Strategy
     - Add JwtStrategy as provider in AuthModule
     - Configure JwtModule with secret and expiration options
     - Export AuthService for use in controllers
