@@ -63,9 +63,9 @@
     - Create constants file in server/src/config/auth.constants.ts for JWT secret management
     - _Requirements: 1.1, 1.4, 1.5_
 
-- [ ] 4. Implement Passport Local Strategy
+- [x] 4. Implement Passport Local Strategy
 
-  - [ ] 4.1 Create LocalStrategy class
+  - [x] 4.1 Create LocalStrategy class
 
     - Create LocalStrategy in server/src/api/v1/auth/strategies/local.strategy.ts
     - Extend PassportStrategy with passport-local Strategy
@@ -73,14 +73,14 @@
     - Handle authentication failures with UnauthorizedException
     - _Requirements: 1.1, 1.2_
 
-  - [ ] 4.2 Create LocalAuthGuard
+  - [x] 4.2 Create LocalAuthGuard
 
     - Create LocalAuthGuard in server/src/common/guards/local-auth.guard.ts
     - Extend AuthGuard with 'local' strategy name
     - Provide clean guard class without magic strings
     - _Requirements: 1.1, 3.3_
 
-  - [ ] 4.3 Configure AuthModule with Local Strategy
+  - [x] 4.3 Configure AuthModule with Local Strategy
     - Add LocalStrategy as provider in AuthModule
     - Import PassportModule for strategy support
     - _Requirements: 3.1, 3.2_
