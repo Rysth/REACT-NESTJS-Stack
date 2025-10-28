@@ -156,9 +156,9 @@
     - Return success message
     - _Requirements: 2.1, 2.3_
 
-- [ ] 7. Create DTOs and enhance services
+- [x] 7. Create DTOs and enhance services
 
-  - [ ] 7.1 Create authentication DTOs
+  - [x] 7.1 Create authentication DTOs
 
     - Create CreateUserDto in server/src/api/v1/auth/dto/create-user.dto.ts
     - Create LoginDto in server/src/api/v1/auth/dto/login.dto.ts
@@ -167,7 +167,7 @@
     - Use class-validator decorators for proper validation
     - _Requirements: 1.1, 1.3, 2.1, 2.2, 2.4_
 
-  - [ ] 7.2 Enhance Users service with full CRUD operations
+  - [x] 7.2 Enhance Users service with full CRUD operations
 
     - Add createUser method to UsersService for user registration
     - Implement findByEmail method for email-based lookups
@@ -176,7 +176,7 @@
     - Add proper error handling with NestJS exceptions
     - _Requirements: 1.3, 2.1, 2.2, 2.4_
 
-  - [ ] 7.3 Add user entity and password hashing
+  - [x] 7.3 Add user entity and password hashing
     - Create User interface with proper fields (id, email, username, fullName, password, isVerified, etc.)
     - Add verification token and password reset token fields
     - Implement proper password hashing with bcrypt in AuthService
@@ -187,8 +187,8 @@
 
   - [ ] 8.1 Create email service module
 
-    - Run `docker-compose exec server npx nest g module common/email` to create EmailModule
-    - Run `docker-compose exec server npx nest g service common/email` to create EmailService
+    - Run `docker-compose exec server bunx nest g module common/email` to create EmailModule
+    - Run `docker-compose exec server bunx nest g service common/email` to create EmailService
     - Configure EmailModule as a global module
     - _Requirements: 2.1, 2.2, 2.4_
 

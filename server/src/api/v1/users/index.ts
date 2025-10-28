@@ -1,2 +1,3 @@
 export { UsersModule } from "./users.module";
-export { UsersService, User } from "./users.service";
+export { UsersService } from "./users.service";
+export { User } from "./interfaces/user.interface";
