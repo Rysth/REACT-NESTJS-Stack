@@ -1,0 +1,120 @@
+# Implementation Plan
+
+- [ ] 1. Install required dependencies and setup project structure
+
+  - Install Passport packages: @nestjs/passport, passport, passport-local, @types/passport-local
+  - Install JWT packages: @nestjs/jwt, passport-jwt, @types/passport-jwt
+  - Create auth module directory structure
+  - _Requirements: 1.1, 2.1, 3.1_
+
+- [ ] 2. Create Users module and service
+
+  - [ ] 2.1 Generate Users module and service using NestJS CLI
+
+    - Create UsersModule with proper exports configuration
+    - Implement UsersService with in-memory user store
+    - Define User interface and export from module
+    - _Requirements: 1.3, 3.4_
+
+  - [ ] 2.2 Implement user lookup functionality
+    - Create findOne method to retrieve users by username
+    - Add sample user data for testing (john/changeme, maria/guess)
+    - _Requirements: 1.3_
+
+- [ ] 3. Create Auth module and core authentication service
+
+  - [ ] 3.1 Generate Auth module and service using NestJS CLI
+
+    - Create AuthModule with proper imports and providers
+    - Import UsersModule to access user services
+    - _Requirements: 1.1, 3.1, 3.4_
+
+  - [ ] 3.2 Implement AuthService with user validation
+
+    - Create validateUser method for credential verification
+    - Implement password comparison logic (plain text for demo)
+    - Return user object without password on successful validation
+    - _Requirements: 1.1, 1.2, 1.3_
+
+  - [ ] 3.3 Add JWT functionality to AuthService
+    - Implement login method to generate JWT tokens
+    - Configure JWT payload with username and userId (sub)
+    - Create constants file for JWT secret management
+    - _Requirements: 1.1, 1.4, 1.5_
+
+- [ ] 4. Implement Passport Local Strategy
+
+  - [ ] 4.1 Create LocalStrategy class
+
+    - Extend PassportStrategy with passport-local Strategy
+    - Implement validate method using AuthService
+    - Handle authentication failures with UnauthorizedException
+    - _Requirements: 1.1, 1.2_
+
+  - [ ] 4.2 Create LocalAuthGuard
+
+    - Extend AuthGuard with 'local' strategy name
+    - Provide clean guard class without magic strings
+    - _Requirements: 1.1, 3.3_
+
+  - [ ] 4.3 Configure AuthModule with Local Strategy
+    - Add LocalStrategy as provider in AuthModule
+    - Import PassportModule for strategy support
+    - _Requirements: 3.1, 3.2_
+
+- [ ] 5. Implement JWT Strategy and Guards
+
+  - [ ] 5.1 Create JwtStrategy class
+
+    - Extend PassportStrategy with passport-jwt Strategy
+    - Configure JWT extraction from Authorization Bearer header
+    - Implement validate method to return user payload
+    - _Requirements: 2.1, 2.3, 2.4_
+
+  - [ ] 5.2 Create JwtAuthGuard
+
+    - Extend AuthGuard with 'jwt' strategy name
+    - Provide reusable guard for protected routes
+    - _Requirements: 2.1, 2.2, 3.3_
+
+  - [ ] 5.3 Configure AuthModule with JWT Strategy
+    - Add JwtStrategy as provider in AuthModule
+    - Configure JwtModule with secret and expiration options
+    - Export AuthService for use in controllers
+    - _Requirements: 2.4, 3.1, 3.2_
+
+- [ ] 6. Create authentication endpoints
+
+  - [ ] 6.1 Implement login endpoint in AppController
+
+    - Create POST /auth/login route with LocalAuthGuard
+    - Inject AuthService and call login method
+    - Return JWT token in response
+    - _Requirements: 1.1, 1.4_
+
+  - [ ] 6.2 Create protected profile endpoint
+    - Implement GET /profile route with JwtAuthGuard
+    - Return user information from req.user
+    - Demonstrate JWT authentication working
+    - _Requirements: 2.1, 2.3_
+
+- [ ] 7. Integration and testing setup
+
+  - [ ] 7.1 Update AppModule with authentication modules
+
+    - Import AuthModule in main AppModule
+    - Ensure proper module dependency resolution
+    - _Requirements: 3.1, 3.4_
+
+  - [ ] 7.2 Create manual testing documentation
+
+    - Document cURL commands for testing login endpoint
+    - Provide examples for testing protected routes with JWT
+    - Include error scenario testing examples
+    - _Requirements: 1.1, 1.2, 2.1, 2.2_
+
+  - [ ] 7.3 Add basic unit tests for core services
+    - Write tests for AuthService validateUser and login methods
+    - Create tests for UsersService findOne method
+    - Test strategy validation logic
+    - _Requirements: 1.1, 1.3, 2.3_
