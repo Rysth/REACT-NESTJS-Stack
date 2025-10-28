@@ -183,16 +183,16 @@
     - Create password comparison methods
     - _Requirements: 1.3, 2.1, 2.2, 2.4_
 
-- [ ] 8. Implement email service (optional)
+- [x] 8. Implement email service (optional)
 
-  - [ ] 8.1 Create email service module
+  - [x] 8.1 Create email service module
 
     - Run `docker-compose exec server bunx nest g module common/email` to create EmailModule
     - Run `docker-compose exec server bunx nest g service common/email` to create EmailService
     - Configure EmailModule as a global module
     - _Requirements: 2.1, 2.2, 2.4_
 
-  - [ ] 8.2 Implement email service functionality
+  - [x] 8.2 Implement email service functionality
     - Create methods for sending verification and password reset emails
     - Use nodemailer or similar library for email sending
     - Create email templates for different types of emails
