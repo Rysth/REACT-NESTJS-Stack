@@ -24,9 +24,9 @@
     - Ensure all new endpoints follow versioned structure
     - _Requirements: 3.1, 3.4_
 
-- [ ] 2. Create Users module and service
+- [x] 2. Create Users module and service
 
-  - [ ] 2.1 Generate Users module and service using NestJS CLI
+  - [x] 2.1 Generate Users module and service using NestJS CLI
 
     - Run `docker-compose exec server npx nest g module api/v1/users` to create UsersModule
     - Run `docker-compose exec server npx nest g service api/v1/users` to create UsersService
@@ -35,7 +35,7 @@
     - Define User interface and export from module
     - _Requirements: 1.3, 3.4_
 
-  - [ ] 2.2 Implement user lookup functionality
+  - [x] 2.2 Implement user lookup functionality
     - Create findOne method to retrieve users by username
     - Add sample user data for testing (john/changeme, maria/guess)
     - _Requirements: 1.3_
