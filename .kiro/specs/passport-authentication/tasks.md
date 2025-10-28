@@ -108,9 +108,9 @@
     - Export AuthService for use in controllers
     - _Requirements: 2.4, 3.1, 3.2_
 
-- [ ] 6. Create authentication endpoints
+- [x] 6. Create authentication endpoints
 
-  - [ ] 6.1 Create AuthController for authentication endpoints
+  - [x] 6.1 Create AuthController for authentication endpoints
 
     - Run `docker-compose exec server npx nest g controller api/v1/auth` to create AuthController
     - Create POST /api/v1/auth/login route with LocalAuthGuard in server/src/api/v1/auth/auth.controller.ts
@@ -118,7 +118,7 @@
     - Return JWT access_token and user info in response
     - _Requirements: 1.1, 1.4_
 
-  - [ ] 6.2 Create user registration endpoint
+  - [x] 6.2 Create user registration endpoint
 
     - Add POST /api/v1/auth/register route to AuthController
     - Create DTOs for registration validation (CreateUserDto)
@@ -127,7 +127,7 @@
     - Return success message and user info (without password)
     - _Requirements: 1.1, 1.3, 2.1_
 
-  - [ ] 6.3 Create email verification endpoints
+  - [x] 6.3 Create email verification endpoints
 
     - Add POST /api/v1/auth/verify-email route for email verification with token
     - Add POST /api/v1/auth/resend-verification route for resending verification emails
@@ -135,7 +135,7 @@
     - Handle token validation and account activation
     - _Requirements: 2.1, 2.2_
 
-  - [ ] 6.4 Create password reset endpoints
+  - [x] 6.4 Create password reset endpoints
 
     - Add POST /api/v1/auth/forgot-password route for password reset requests
     - Add POST /api/v1/auth/reset-password route for password reset with token
@@ -143,14 +143,14 @@
     - Implement secure token generation and validation
     - _Requirements: 2.1, 2.4_
 
-  - [ ] 6.5 Create protected profile endpoint
+  - [x] 6.5 Create protected profile endpoint
 
     - Add GET /api/v1/auth/me route with JwtAuthGuard to AuthController
     - Return current user information from req.user
     - Demonstrate JWT authentication working
     - _Requirements: 2.1, 2.3_
 
-  - [ ] 6.6 Create logout endpoint
+  - [x] 6.6 Create logout endpoint
     - Add POST /api/v1/auth/logout route to AuthController
     - Handle token blacklisting or session cleanup
     - Return success message
