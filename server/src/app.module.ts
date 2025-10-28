@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { HealthModule } from './health/health.module';
+import { HealthModule } from './api/v1/health/health.module';
 import { DrizzleModule } from './db/drizzle.module';
 
 @Module({
