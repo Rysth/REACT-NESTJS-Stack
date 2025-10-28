@@ -113,38 +113,112 @@
   - [ ] 6.1 Create AuthController for authentication endpoints
 
     - Run `docker-compose exec server npx nest g controller api/v1/auth` to create AuthController
-    - Create POST /auth/login route with LocalAuthGuard in server/src/api/v1/auth/auth.controller.ts
+    - Create POST /api/v1/auth/login route with LocalAuthGuard in server/src/api/v1/auth/auth.controller.ts
     - Inject AuthService and call login method
-    - Return JWT token in response
+    - Return JWT access_token and user info in response
     - _Requirements: 1.1, 1.4_
 
-  - [ ] 6.2 Create protected profile endpoint
-    - Add GET /auth/profile route with JwtAuthGuard to AuthController
-    - Return user information from req.user
+  - [ ] 6.2 Create user registration endpoint
+
+    - Add POST /api/v1/auth/register route to AuthController
+    - Create DTOs for registration validation (CreateUserDto)
+    - Implement user registration with proper validation using class-validator
+    - Hash passwords using bcrypt before storing
+    - Return success message and user info (without password)
+    - _Requirements: 1.1, 1.3, 2.1_
+
+  - [ ] 6.3 Create email verification endpoints
+
+    - Add POST /api/v1/auth/verify-email route for email verification with token
+    - Add POST /api/v1/auth/resend-verification route for resending verification emails
+    - Create proper DTOs for email verification requests
+    - Handle token validation and account activation
+    - _Requirements: 2.1, 2.2_
+
+  - [ ] 6.4 Create password reset endpoints
+
+    - Add POST /api/v1/auth/forgot-password route for password reset requests
+    - Add POST /api/v1/auth/reset-password route for password reset with token
+    - Create DTOs for password reset validation
+    - Implement secure token generation and validation
+    - _Requirements: 2.1, 2.4_
+
+  - [ ] 6.5 Create protected profile endpoint
+
+    - Add GET /api/v1/auth/me route with JwtAuthGuard to AuthController
+    - Return current user information from req.user
     - Demonstrate JWT authentication working
-    - Final endpoints: POST /api/v1/auth/login and GET /api/v1/auth/profile
     - _Requirements: 2.1, 2.3_
 
-- [ ] 7. Integration and testing setup
+  - [ ] 6.6 Create logout endpoint
+    - Add POST /api/v1/auth/logout route to AuthController
+    - Handle token blacklisting or session cleanup
+    - Return success message
+    - _Requirements: 2.1, 2.3_
 
-  - [ ] 7.1 Update AppModule with authentication modules
+- [ ] 7. Create DTOs and enhance services
+
+  - [ ] 7.1 Create authentication DTOs
+
+    - Create CreateUserDto in server/src/api/v1/auth/dto/create-user.dto.ts
+    - Create LoginDto in server/src/api/v1/auth/dto/login.dto.ts
+    - Create VerifyEmailDto and ResendVerificationDto
+    - Create ForgotPasswordDto and ResetPasswordDto
+    - Use class-validator decorators for proper validation
+    - _Requirements: 1.1, 1.3, 2.1, 2.2, 2.4_
+
+  - [ ] 7.2 Enhance Users service with full CRUD operations
+
+    - Add createUser method to UsersService for user registration
+    - Implement findByEmail method for email-based lookups
+    - Add email verification status tracking
+    - Implement password reset token management
+    - Add proper error handling with NestJS exceptions
+    - _Requirements: 1.3, 2.1, 2.2, 2.4_
+
+  - [ ] 7.3 Add user entity and password hashing
+    - Create User interface with proper fields (id, email, username, fullName, password, isVerified, etc.)
+    - Add verification token and password reset token fields
+    - Implement proper password hashing with bcrypt in AuthService
+    - Create password comparison methods
+    - _Requirements: 1.3, 2.1, 2.2, 2.4_
+
+- [ ] 8. Implement email service (optional)
+
+  - [ ] 8.1 Create email service module
+
+    - Run `docker-compose exec server npx nest g module common/email` to create EmailModule
+    - Run `docker-compose exec server npx nest g service common/email` to create EmailService
+    - Configure EmailModule as a global module
+    - _Requirements: 2.1, 2.2, 2.4_
+
+  - [ ] 8.2 Implement email service functionality
+    - Create methods for sending verification and password reset emails
+    - Use nodemailer or similar library for email sending
+    - Create email templates for different types of emails
+    - Add proper error handling for email failures
+    - _Requirements: 2.1, 2.2, 2.4_
+
+- [ ] 9. Integration and testing setup
+
+  - [ ] 9.1 Update AppModule with authentication modules
 
     - Import AuthModule in main AppModule
     - Ensure proper module dependency resolution
     - _Requirements: 3.1, 3.4_
 
-  - [ ] 7.2 Create manual testing documentation
+  - [ ] 9.2 Create manual testing documentation
 
-    - Document cURL commands for testing login endpoint against server container (localhost:3000)
+    - Document cURL commands for testing all authentication endpoints against server container (localhost:3000)
     - Provide examples for testing protected routes with JWT against server container
-    - Include error scenario testing examples
-    - Test versioned endpoints: POST localhost:3000/api/v1/auth/login and GET localhost:3000/api/v1/auth/profile
+    - Include error scenario testing examples for registration, login, email verification, and password reset
+    - Test all versioned endpoints: POST /api/v1/auth/register, POST /api/v1/auth/login, GET /api/v1/auth/me, etc.
     - Verify health endpoint still works at localhost:3000/api/v1/health
-    - _Requirements: 1.1, 1.2, 2.1, 2.2_
+    - _Requirements: 1.1, 1.2, 2.1, 2.2, 2.4_
 
-  - [ ] 7.3 Add basic unit tests for core services
+  - [ ] 9.3 Add basic unit tests for core services
     - Write tests for AuthService validateUser and login methods in server/src/api/v1/auth/
-    - Create tests for UsersService findOne method in server/src/api/v1/users/
-    - Test strategy validation logic
+    - Create tests for UsersService methods in server/src/api/v1/users/
+    - Test strategy validation logic and DTO validation
     - Run tests using `docker-compose exec server npm run test`
     - _Requirements: 1.1, 1.3, 2.3_
