@@ -40,9 +40,9 @@
     - Add sample user data for testing (john/changeme, maria/guess)
     - _Requirements: 1.3_
 
-- [ ] 3. Create Auth module and core authentication service
+- [x] 3. Create Auth module and core authentication service
 
-  - [ ] 3.1 Generate Auth module and service using NestJS CLI
+  - [x] 3.1 Generate Auth module and service using NestJS CLI
 
     - Run `docker-compose exec server npx nest g module api/v1/auth` to create AuthModule
     - Run `docker-compose exec server npx nest g service api/v1/auth` to create AuthService
@@ -50,14 +50,14 @@
     - Import UsersModule to access user services
     - _Requirements: 1.1, 3.1, 3.4_
 
-  - [ ] 3.2 Implement AuthService with user validation
+  - [x] 3.2 Implement AuthService with user validation
 
     - Create validateUser method for credential verification
     - Implement password comparison logic (plain text for demo)
     - Return user object without password on successful validation
     - _Requirements: 1.1, 1.2, 1.3_
 
-  - [ ] 3.3 Add JWT functionality to AuthService
+  - [x] 3.3 Add JWT functionality to AuthService
     - Implement login method to generate JWT tokens
     - Configure JWT payload with username and userId (sub)
     - Create constants file in server/src/config/auth.constants.ts for JWT secret management
