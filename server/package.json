@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "tsx watch src/main.ts",
+        "dev": "bun --watch src/main.ts",
         "build": "tsc -p tsconfig.build.json",
         "start": "bun run dist/main.js",
         "db:generate": "bunx drizzle-kit generate",
