@@ -59,21 +59,30 @@ start_containers() {
   blue "Esperando a que los contenedores se inicien..."
   sleep 5
 
-  # Preguntar si quiere poblar la base de datos
+  # Preguntar si quiere ejecutar migraciones de Drizzle
   echo
-  read -p "¿Quieres ejecutar 'rails db:seed' para poblar la base de datos? (y/N): " -n 1 -r
+  read -p "¿Quieres ejecutar migraciones de Drizzle? (y/N): " -n 1 -r
   echo
   if [[ $REPLY =~ ^[Yy]$ ]]; then
-    blue "Ejecutando rails db:seed..."
-    if docker compose -f docker-compose.dev.yml exec server rails db:seed; then
-      green "Base de datos poblada exitosamente."
+    blue "Generando migraciones de Drizzle..."
+    if docker compose -f docker-compose.dev.yml exec server bun run db:generate; then
+      green "Migraciones generadas exitosamente."
+      blue "Aplicando migraciones..."
+      if docker compose -f docker-compose.dev.yml exec server bun run db:migrate; then
+        green "Migraciones aplicadas exitosamente."
+      else
+        yellow "Error al aplicar migraciones. Puedes ejecutarlo manualmente con:"
+        yellow "docker compose -f docker-compose.dev.yml exec server bun run db:migrate"
+      fi
     else
-      yellow "Error al poblar la base de datos. Puedes ejecutarlo manualmente más tarde con:"
-      yellow "docker compose exec server rails db:seed"
+      yellow "Error al generar migraciones. Puedes ejecutarlo manualmente con:"
+      yellow "docker compose -f docker-compose.dev.yml exec server bun run db:generate"
     fi
   else
-    blue "Omitiendo el poblado de la base de datos."
-    blue "Puedes ejecutarlo más tarde con: docker compose exec server rails db:seed"
+    blue "Omitiendo migraciones de la base de datos."
+    blue "Puedes ejecutarlas más tarde con:"
+    blue "  docker compose -f docker-compose.dev.yml exec server bun run db:generate"
+    blue "  docker compose -f docker-compose.dev.yml exec server bun run db:migrate"
   fi
 
   # Mostrar logs en primer plano
