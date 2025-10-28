@@ -15,6 +15,16 @@ async function bootstrap() {
     await app.listen(port, '0.0.0.0');
     // eslint-disable-next-line no-console
     console.log(`API listening on http://0.0.0.0:${port}`);
+
+    // Mostrar rutas
+    const server = app.getHttpServer();
+    const router = server._events.request._router;
+    console.log('Available routes:');
+    router.stack
+        .filter((r) => r.route)
+        .forEach((r) => {
+            console.log(`${Object.keys(r.route.methods).join(',').toUpperCase()} ${r.route.path}`);
+        });
 }
 
 bootstrap();
