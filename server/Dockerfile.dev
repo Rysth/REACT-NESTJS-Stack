@@ -1,0 +1,18 @@
+# Dev Dockerfile for NestJS with Bun
+FROM oven/bun:1.1-alpine
+
+WORKDIR /usr/src/app
+
+# Install deps
+COPY package.json bun.lockb* ./
+RUN bun install
+
+# App source
+COPY tsconfig*.json ./
+COPY drizzle.config.ts ./drizzle.config.ts
+COPY src ./src
+
+ENV PORT=3000
+EXPOSE 3000
+
+CMD ["bun", "run", "dev"]

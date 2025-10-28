@@ -1,0 +1,10 @@
+node_modules
+npm-debug.log
+Dockerfile*
+.env
+dist
+.turbo
+.next
+coverage
+.DS_Store
+*.swp
