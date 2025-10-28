@@ -1,6 +1,6 @@
 # NestJS API (server/)
 
-Minimal NestJS + Prisma + Postgres API with a health check.
+Minimal NestJS + Drizzle + Postgres API with a health check.
 
 ## Endpoints
 
